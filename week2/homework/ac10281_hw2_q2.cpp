@@ -6,13 +6,14 @@ int main()
 {
     int dollars, quarters, dimes, nickles, pennies, cents, total;
 
-    cout << "Please enter your amount in the format of dollars and cents separated by a space:\n";
+    cout << "Please enter your amount in the format of dollars and cents separated by a space:" << endl;
 
     cin >> dollars >> cents;
     
     total = (dollars * 100) + cents;
 
     quarters = total / 25;
+    total = total - (quarters * 25);
     total -= quarters * 25;
 
     dimes = total / 10;
@@ -24,7 +25,7 @@ int main()
     pennies = total;
 
 
-    cout << dollars << " dollars and " << cents << " cents are :\n";
+    cout << dollars << " dollars and " << cents << " cents are :" << endl;
     cout << quarters << " quarters, " << dimes << " dimes, " << nickles << " nickles and " << pennies << " pennies";
     return 0;
 }

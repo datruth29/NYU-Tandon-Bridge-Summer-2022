@@ -6,7 +6,7 @@ int main()
 {
     int dollars, quarters, dimes, nickles, pennies, cents, total;
 
-    cout << "Please enter number of coins: \n";
+    cout << "Please enter number of coins: " << endl;
 
     cout << "# of quarters:";
     cin >> quarters;
