@@ -7,3 +7,6 @@
 ~*
 *.bak
 */homework/*.log
+*.exe
+*.ilk
+*.pdb
