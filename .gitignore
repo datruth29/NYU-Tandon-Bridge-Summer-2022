@@ -1,12 +1,16 @@
+*
+!/**/
+!**.*
+~*
 .DS_Store
 *.aux
 *.fdb_latexmk
 *.fls
 *.synctex.gz
 *.tex
-~*
 *.bak
 */homework/*.log
 *.exe
 *.ilk
 *.pdb
+*.dSym/
