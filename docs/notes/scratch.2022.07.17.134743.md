@@ -2,7 +2,11 @@
 id: iaqia8af0khkg5muvx3wbiy
 title: '134743'
 desc: ''
-updated: 1658177133680
+<<<<<<< HEAD
+updated: 1658180574650
+=======
+updated: 1658150265865
+>>>>>>> 572727a4263d97779cab67c1f2aa72dbc6d33c56
 created: 1658080066651
 ---
 
@@ -49,4 +53,7 @@ If $x$ and $c$ are real numbers, then exactly one of the following statements is
 - $x = c$
 - $x > c$
 
+<<<<<<< HEAD
 A real number is __positive__ if and only if $x > 0$. A real number $x$ is __negative__ if and only if $x < 0$. A real number $x$ is __non-negative__ if and only if $x \geq 0$. A real number $x$ is __non-positive__ if and only if $x \leq 0$.
+=======
+>>>>>>> 572727a4263d97779cab67c1f2aa72dbc6d33c56
