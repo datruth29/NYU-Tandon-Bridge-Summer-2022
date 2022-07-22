@@ -2,6 +2,9 @@
 
 using namespace std;
 
+const int MINUTES_IN_HOUR = 60;
+const int HOURS_IN_DAY = 24;
+
 int main()
 {
     int days = 0, hours = 0, minutes = 0, total = 0, input;
@@ -26,11 +29,11 @@ int main()
     cin >> input; 
     minutes += input; 
 
-    hours += minutes / 60;
-    minutes = minutes % 60;
+    hours += minutes / MINUTES_IN_HOUR;
+    minutes = minutes % MINUTES_IN_HOUR;
 
-    days += hours / 24;
-    hours = hours % 24;
+    days += hours / HOURS_IN_DAY;
+    hours = hours % HOURS_IN_DAY;
 
     cout << endl << endl << "The total time both of them worked together is: "
     << days << " days, " << hours << " hours and " << minutes << " minutes.";

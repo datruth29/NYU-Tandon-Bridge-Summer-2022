@@ -2,6 +2,11 @@
 
 using namespace std;
 
+const int DOLLAR_VALUE = 100;
+const int QUARTER_VALUE = 25;
+const int DIME_VALUE = 10;
+const int NICKLE_VALUE = 5;
+
 int main()
 {
     int dollars, quarters, dimes, nickles, pennies, cents, total;
@@ -17,13 +22,13 @@ int main()
     cout << "# of pennies:";
     cin >> pennies;
     
-    quarters = quarters * 25;
-    dimes = dimes * 10;
-    nickles = nickles * 5;
+    quarters = quarters * QUARTER_VALUE;
+    dimes = dimes * DIME_VALUE;
+    nickles = nickles * NICKLE_VALUE;
     total = quarters + dimes + nickles + pennies;
 
-    dollars = total / 100;
-    cents = total - (dollars * 100);
+    dollars = total / DOLLAR_VALUE;
+    cents = total - (dollars * DOLLAR_VALUE);
 
     cout << "The total is " << dollars << " dollars and " << cents << " cents";
     return 0;
