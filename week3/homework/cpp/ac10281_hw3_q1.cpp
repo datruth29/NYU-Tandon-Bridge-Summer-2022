@@ -12,6 +12,8 @@ int main()
     float total_discount = 0.0;
     char user_input;
 
+    cout.precision(7);
+
     cout << "Enter price of first item: ";
     cin >> first_item_price;
 
@@ -25,14 +27,7 @@ int main()
     cin >> tax_rate;
     tax_rate /= 100;
 
-    float base_price = first_item_price + second_item_price;
-    cout << "Base Price: " << base_price << endl;
-
-    if(user_input == 'Y' || user_input == 'y')
-    {
-        total_discount = base_price * MEMBERSHIP_DISCOUNT;
-        
-    }
+    cout << "Base Price: " << first_item_price + second_item_price << endl;
 
     if (first_item_price < second_item_price)
     {
@@ -43,7 +38,13 @@ int main()
         second_item_price /= 2;
     }
 
-    float price_after_discount = (first_item_price + second_item_price) - total_discount;
+    float price_after_discount = first_item_price + second_item_price;
+
+    if (user_input == 'Y' || user_input == 'y')
+    {
+        price_after_discount = price_after_discount - (price_after_discount * MEMBERSHIP_DISCOUNT);
+    }
+
     cout << "Base after discounts: " << price_after_discount << endl;
 
     float price_with_tax = price_after_discount + (price_after_discount * tax_rate);
