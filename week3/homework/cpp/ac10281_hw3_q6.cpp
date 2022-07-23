@@ -22,6 +22,24 @@ int main()
     cout << "Please enter the number of minutes the call lasted: ";
     cin >> caller_minutes;
 
+    float total = 0;
+
+    if ((day_of_the_week == "Su") ||(day_of_the_week == "Sa"))
+    {
+        total = caller_minutes * WEEKEND_RATE;
+    }
+    else if ((hours < 8) || (hours >= 18))
+    {
+        total = caller_minutes * OFF_HOURS_RATE;
+        cout << "Off Hours " << hours;
+    }
+    else
+    {
+        total = caller_minutes * ON_HOURS_RATE;
+        cout << "On Hours: " << hours;
+    }
+
+    cout << "Total Cost of Call: " << total;
     
 
     return 0;
