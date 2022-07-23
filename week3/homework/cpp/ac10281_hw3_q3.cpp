@@ -18,9 +18,6 @@ int main()
 
     float numerator = sqrt((b*b)-(4*a*c));
 
-    cout << numerator << endl;
-    cout << isnan(numerator) << endl;
-
     if (a == 0 && b == 0 && c == 0)
     {
         cout << "This equation has an infinite number of solutions";

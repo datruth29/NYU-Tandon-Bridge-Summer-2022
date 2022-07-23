@@ -9,7 +9,6 @@ int main()
     float first_item_price;
     float second_item_price;
     float tax_rate;
-    float total_discount = 0.0;
     char user_input;
 
     cout.precision(7);
@@ -45,9 +44,9 @@ int main()
         price_after_discount = price_after_discount - (price_after_discount * MEMBERSHIP_DISCOUNT);
     }
 
-    cout << "Base after discounts: " << price_after_discount << endl;
-
     float price_with_tax = price_after_discount + (price_after_discount * tax_rate);
+
+    cout << "Base after discounts: " << price_after_discount << endl;
     cout << "Total price: " << price_with_tax << endl;
 
     return 0;
