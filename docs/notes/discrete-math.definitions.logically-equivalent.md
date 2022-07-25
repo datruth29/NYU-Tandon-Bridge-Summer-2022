@@ -13,7 +13,7 @@ Two compound propositions are said to be __logically equivalent__ if they have t
 ---------|----------
  $\equiv$ | \equiv 
 
-__Note__: While similar, [[discrete-math.operators.biconditional]] is an operator, whereas logically equivalent is describing the result of two compound propositions.
+__Note__: While similar, [[discrete-math.logic.operators.biconditional]] is an operator, whereas logically equivalent is describing the result of two compound propositions.
 
 
 
