@@ -11,7 +11,7 @@ int main()
     float tax_rate;
     char user_input;
 
-    cout.precision(7);
+    cout << fixed << showpoint;
 
     cout << "Enter price of first item: ";
     cin >> first_item_price;
@@ -26,6 +26,7 @@ int main()
     cin >> tax_rate;
     tax_rate /= 100;
 
+    cout.precision(1);
     cout << "Base Price: " << first_item_price + second_item_price << endl;
 
     if (first_item_price < second_item_price)
@@ -47,6 +48,7 @@ int main()
     float price_with_tax = price_after_discount + (price_after_discount * tax_rate);
 
     cout << "Base after discounts: " << price_after_discount << endl;
+    cout.precision(7);
     cout << "Total price: " << price_with_tax << endl;
 
     return 0;

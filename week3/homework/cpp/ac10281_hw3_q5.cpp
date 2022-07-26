@@ -25,22 +25,29 @@ int main()
     float bmi = weight/(height*height);
     string status;
 
-    if (bmi < 18.5)
+    if ((weight < 0) || (height <= 0))
     {
-        status = "Underweight";
+        status = "invalid. Enter valid weight/height values.";
     }
+    else
+    {
+        if (bmi < 18.5)
+        {
+            status = "Underweight";
+        }
 
-    if (bmi >= 18.5 && bmi < 25)
-    {
-        status = "Normal";
-    }
-    if (bmi >= 25 && bmi < 30)
-    {
-        status = "Overweight";
-    }
-    if (bmi >= 30)
-    {
-        status = "Obese";
+        if (bmi >= 18.5 && bmi < 25)
+        {
+            status = "Normal";
+        }
+        if (bmi >= 25 && bmi < 30)
+        {
+            status = "Overweight";
+        }
+        if (bmi >= 30)
+        {
+            status = "Obese";
+        }
     }
 
     cout << "The weight status is: " << status;

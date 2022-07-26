@@ -1,5 +1,6 @@
 #include<iostream>
 
+
 using namespace std;
 
 const int FLOOR_ROUND = 1;
@@ -8,7 +9,7 @@ const int ROUND = 3;
 
 int main()
 {
-    float real_number;
+    long double real_number;
     int rounding_method;
 
     cout << "Please enter a Real number:" << endl;
@@ -20,6 +21,12 @@ int main()
     << "3. Round to the nearest whole number" << endl;
     cin >> rounding_method;
 
+    // If the real number is negative, we decrease it by 1.
+    if (real_number < 0)
+    {
+        real_number -= 1;
+    }
+
     switch(rounding_method)
     {
         case(FLOOR_ROUND):
@@ -27,7 +34,15 @@ int main()
         break;
 
         case(CEILING_ROUND):
-            cout << (int) (real_number+1);
+
+            if ((real_number - int(real_number)) != 0)
+            {
+                cout << int(real_number)+1;
+            }
+            else
+            {
+                cout << int(real_number);
+            }
         break;
 
         case(ROUND):
