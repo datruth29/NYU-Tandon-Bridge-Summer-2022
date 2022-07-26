@@ -2,7 +2,7 @@
 id: nq33abioiwu3alkezlp716q
 title: Difference
 desc: ''
-updated: 1658759841936
+updated: 1658797861332
 created: 1658759839350
 ---
 
@@ -11,7 +11,13 @@ The __difference__ between two sets $A$ and $B$, denoted $A - B$, is the set of 
 Example:
 
 $$
-A = \{a, b, c, e, f\}
-B = \{d, e, f, g\}
-A = \{a, b, c\}
+A = \{a, b, c, e, f\} \\
+B = \{d, e, f, g\} \\
+A - B = \{a, b, c\}
 $$
+
+## Set Subtraction Law
+
+The set subtraction law states the following:
+
+$A - B = (A \cap \overline{B})$
