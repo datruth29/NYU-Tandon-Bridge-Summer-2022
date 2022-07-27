@@ -31,14 +31,14 @@ int main()
     else if ((hours < 8) || (hours >= 18))
     {
         total = caller_minutes * OFF_HOURS_RATE;
-        cout << "Off Hours " << hours;
     }
     else
     {
         total = caller_minutes * ON_HOURS_RATE;
-        cout << "On Hours: " << hours;
     }
 
+    cout << fixed << showpoint;
+    cout.precision(2);
     cout << "Total Cost of Call: " << total;
     
 
