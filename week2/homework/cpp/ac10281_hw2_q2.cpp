@@ -18,7 +18,6 @@ int main()
     total = (dollars * DOLLAR_VALUE) + cents;
 
     quarters = total / QUARTER_VALUE;
-    total = total - (quarters * QUARTER_VALUE);
     total -= quarters * QUARTER_VALUE;
 
     dimes = total / DIME_VALUE;
