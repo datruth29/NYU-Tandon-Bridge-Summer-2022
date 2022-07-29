@@ -24,17 +24,19 @@ int main()
 
     float total = 0;
 
+    int start_time = (hours * 60) + minutes;
+
     if ((day_of_the_week == "Su") ||(day_of_the_week == "Sa"))
     {
         total = caller_minutes * WEEKEND_RATE;
     }
-    else if ((hours < 8) || (hours >= 18))
+    else if ((start_time >= 8*60) && (start_time <= 18*60))
     {
-        total = caller_minutes * OFF_HOURS_RATE;
+        total = caller_minutes * ON_HOURS_RATE;
     }
     else
     {
-        total = caller_minutes * ON_HOURS_RATE;
+        total = caller_minutes * OFF_HOURS_RATE;
     }
 
     cout << fixed << showpoint;
