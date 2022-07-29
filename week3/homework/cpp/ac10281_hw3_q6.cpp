@@ -6,6 +6,7 @@ using namespace std;
 const float WEEKEND_RATE = .15;
 const float ON_HOURS_RATE = .40;
 const float OFF_HOURS_RATE = .25;
+const int MINUTES_IN_HOUR = 60;
 
 int main()
 {
@@ -24,13 +25,13 @@ int main()
 
     float total = 0;
 
-    int start_time = (hours * 60) + minutes;
+    int start_time = (hours * MINUTES_IN_HOUR) + minutes;
 
     if ((day_of_the_week == "Su") ||(day_of_the_week == "Sa"))
     {
         total = caller_minutes * WEEKEND_RATE;
     }
-    else if ((start_time >= 8*60) && (start_time <= 18*60))
+    else if ((start_time >= 8 * MINUTES_IN_HOUR) && (start_time <= 18 * MINUTES_IN_HOUR))
     {
         total = caller_minutes * ON_HOURS_RATE;
     }
@@ -42,7 +43,6 @@ int main()
     cout << fixed << showpoint;
     cout.precision(2);
     cout << "Total Cost of Call: " << total;
-    
 
     return 0;
 }

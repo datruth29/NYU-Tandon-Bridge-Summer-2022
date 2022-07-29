@@ -9,7 +9,7 @@ const int ROUND = 3;
 
 int main()
 {
-    long double real_number;
+    float real_number;
     int rounding_method;
 
     cout << "Please enter a Real number:" << endl;
@@ -30,7 +30,7 @@ int main()
     switch(rounding_method)
     {
         case(FLOOR_ROUND):
-            cout << (int) real_number;
+            cout << int(real_number);
         break;
 
         case(CEILING_ROUND):
@@ -46,7 +46,7 @@ int main()
         break;
 
         case(ROUND):
-            cout << (int) (real_number+0.5);
+            cout << int(real_number+0.5);
         break;
 
         default:

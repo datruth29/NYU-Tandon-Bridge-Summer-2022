@@ -27,7 +27,7 @@ int main()
 
     if ((weight < 0) || (height <= 0))
     {
-        status = "invalid. Enter valid weight/height values.";
+        status = "Invalid. Enter valid weight/height values.";
     }
     else
     {
