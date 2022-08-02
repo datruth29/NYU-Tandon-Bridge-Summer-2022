@@ -6,8 +6,6 @@ int main()
 {
     int userInputOne;
     int n;
-    cout << "While Loop" << endl;
-    cout << "---------------------------------" << endl;
     cout << "Please enter a positive integer: ";
     cin >> n;
 
@@ -19,8 +17,6 @@ int main()
     }
 
     cout << endl;
-    cout << "For Loop" << endl;
-    cout << "---------------------------------" << endl;
     cout << "Please enter a positive integer: ";
     cin >> n;
     for (int i = 1; i <= n; i++)
