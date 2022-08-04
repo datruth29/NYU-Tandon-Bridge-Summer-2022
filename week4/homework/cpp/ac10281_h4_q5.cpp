@@ -8,9 +8,8 @@ int main()
 
     cout << "Enter a positive number: ";
     cin >> n;
-
-
     int max_rows = n;
+
     // Top half
     for (int row = 0; row < max_rows; row++)
     {
