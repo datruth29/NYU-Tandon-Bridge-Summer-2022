@@ -15,13 +15,7 @@ int main()
 	int lowGuess = 1;
 	int highGuess = 100;
 	bool result = false;
-	cout << secretNumber << endl;
 
-//	cout << "I thought of a number between 1 and 100! Try to guess it." << endl;
-//	cout << "Range[" << lowGuess << ", " << highGuess << "], Number of guesses left: " << guessesLeft << endl;
-//	cout << "Your guess: ";
-//	cin >> userGuess;
-//
 	while (guessesLeft >= 1)
 	{
 		cout << "Range[" << lowGuess << ", " << highGuess << "], Number of guesses left: " << guessesLeft << endl;
