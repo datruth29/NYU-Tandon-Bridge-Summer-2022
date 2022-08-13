@@ -2,7 +2,7 @@
 id: kr76phy9fo24pt22mn5cf9j
 title: Functions
 desc: ''
-updated: 1659663899351
+updated: 1660417818921
 created: 1659298625441
 ---
 
@@ -52,3 +52,36 @@ A function is said to be __bijective__ (or one-to-one correspondence) when that 
 
 If a function is bijective, then it follows that for $f: X \to Y$, $|X| = |Y|$. If the elements of either set is not equal to each other, then the sets will not be able to meet the condition for either one to one, onto, or neither, thereby making it not bijective.
 
+## Inverse of a Function
+
+If a function is a __bijection__, then an inverse of that function can be obtained by reversing the first and second entries of each pair of the function. The inverse of a function $f$ is denoted by $f^{-1}$, and be written as:
+
+$$
+f^{-1} = \{(y, x) : (x, y) \in f\}
+$$
+
+## Composition
+
+The process of applying a function to another function is called __composition__.
+
+To denote that $f: X \to Y$ and $g: Y \to Z$, for functions $f$ and $g$ we will use $g \circ f$. This will be the function $(g \circ f): X \to Z$ such that for all $x \in X, (g \circ f)(x) = g(f(x))$
+
+Note that the the domain and target for $g \circ f$ is the target of domain of $f$ and the co-domain of $g$. 
+
+## Identity Function
+
+The __identity function__ always maps a set onto itself and maps every element onto itself.
+
+The identity function of $A$, denoted $I_A: A \to A$, is defined as $I_A(a) = a$, for all $a \in A$.
+
+If a function $f$ from $A \to B$ has an inverse, then $f$ composed with its inverse is the identity function.
+
+$$
+\begin{align*}
+f(a) &= b \\
+f^{-1}(b) &= a \\
+(f^{-1} \circ f)(a) &= f^{-1}(f(a)) \\
+f^{-1}(f(a)) &= f^{-1}(b) \\
+f^{-1}(b) &= a
+\end{align*}
+$$
