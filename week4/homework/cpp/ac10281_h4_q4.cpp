@@ -9,7 +9,10 @@ int main()
     double geoMean = 0;
     double total = 0;
 
-    cout << "Section A: For Loop" << endl << endl;
+    cout << fixed << showpoint;
+    cout.precision(4);
+
+    cout << "section a" << endl;
     cout << "Please enter the length of the sequence: ";
     cin >> sequence;
 
@@ -29,6 +32,7 @@ int main()
         }
     }
 
+    cout << "The total is " << total << endl;
     geoMean = pow(total , 1.0 / sequence);
     cout << "The geometric mean is: " << geoMean << endl;
 
@@ -37,7 +41,8 @@ int main()
     total = 0;
     int count = 0;
 
-    cout << "Section B: While Loop" << endl << endl;
+    cout << endl;
+    cout << "section b" << endl;
     cout << "Please enter a non-empty sequence of positive integers, each one in a separate line. End your sequence by typing -1:" << endl;
     cin >> sequence;
     while (sequence != -1)

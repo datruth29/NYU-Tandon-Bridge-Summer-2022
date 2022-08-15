@@ -1,13 +1,13 @@
 #include <iostream>
-#include <cmath>
+#include <string>
 
 using namespace std;
 
 int main()
 {
     int userInput;
-    int binaryPosition = 0;
-    long long int binaryResult = 0;  
+    char binaryPosition;
+    string binaryResult = "";
 
     cout << "Enter decimal number: " << endl;
     cin >> userInput;
@@ -18,10 +18,13 @@ int main()
     {
         if (userInput % 2 == 1)
         {
-            binaryResult += pow(10, binaryPosition);
+            binaryPosition = '1';
         }
-
-        binaryPosition++;
+        else
+        {
+            binaryPosition = '0';
+        }
+        binaryResult = binaryPosition + binaryResult;
         userInput /= 2;
     }
     

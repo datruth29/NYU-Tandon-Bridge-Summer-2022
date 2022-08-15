@@ -14,4 +14,5 @@
 *.ilk
 *.pdb
 *.dSym/
-extra/*
+.vs/
+*.bak

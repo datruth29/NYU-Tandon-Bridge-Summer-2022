@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string>
 
 using namespace std;
 
@@ -9,16 +8,14 @@ int main()
 
     cout << "Enter a positive number: ";
     cin >> n;
-
-    int max = 2 * n;
+    int max_rows = n;
 
     // Top half
-    for (int i = 0; i < n; i++)
+    for (int row = 0; row < max_rows; row++)
     {
-        int spaces = i;
-        int stars = (2 * n) - (i * 2) - 1;
+        int stars = (2 * n) - 1;
 
-        for (int j = 0; j < spaces; j++)
+        for (int j = 0; j < row; j++)
         {
             cout << " ";
         }
@@ -28,17 +25,18 @@ int main()
             cout << "*";
         }
 
+        n--;
         cout << endl;
     }
 
     // Bottom half
-    for (int i = n-1; i >= 0; i--)
+    n++;
+
+    for (int row = max_rows-1; row >= 0; row--)
     {
-        int spaces = i;
-        int stars = (2 * n) - (i * 2) - 1;
+        int stars = (2 * n) - 1;
 
-
-        for (int j = 0; j < spaces; j++)
+        for (int j = 0; j < row; j++)
         {
             cout << " ";
         }
@@ -48,6 +46,7 @@ int main()
             cout << "*";
         }
 
+        n++;
         cout << endl;
     }
     return 0;
