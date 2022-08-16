@@ -1,0 +1,18 @@
+{
+    "cSpell.words": [
+        "newpage",
+        "Tollens"
+    ],
+    "spellright.language": [
+        "en"
+    ],
+    "spellright.documentTypes": [
+        "latex",
+        "plaintext"
+    ],
+    "files.associations": {
+        "iostream": "cpp",
+        "initializer_list": "cpp",
+        "xutility": "cpp"
+    }
+}
