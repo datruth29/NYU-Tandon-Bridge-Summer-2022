@@ -4,18 +4,6 @@ using namespace std;
 
 unsigned int fib(unsigned int n);
 
-int main()
-{
-    unsigned int userInput;
-
-    cout << "Please enter a positive integer: ";
-    cin >> userInput;
-
-    cout << fib(userInput);
-
-    return 0;
-}
-
 unsigned int fib(unsigned int n)
 {
     unsigned int currentFib = 1;
@@ -41,4 +29,16 @@ unsigned int fib(unsigned int n)
         currentPlace++;
     }
     return currentFib;
+}
+
+int main()
+{
+    unsigned int userInput;
+
+    cout << "Please enter a positive integer: ";
+    cin >> userInput;
+
+    cout << fib(userInput);
+
+    return 0;
 }

@@ -2,6 +2,8 @@
 
 using namespace std;
 
+void printShiftedTriangle(int n, int m, char symbol);
+void printPineTree(int n, char symbol);
 
 void printShiftedTriangle(int n, int m, char symbol)
 {
@@ -39,7 +41,7 @@ int main()
     int userTriangles;
     char userSymbol;
 
-    cout << "How many triangles do you wish to be in your tree (needs to be greater than 2): ";
+    cout << "How many triangles do you wish to be in your tree?: ";
     cin >> userTriangles;
     cout << "What character would you like to appear on your tree?: ";
     cin >> userSymbol;

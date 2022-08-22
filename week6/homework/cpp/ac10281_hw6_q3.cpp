@@ -3,6 +3,8 @@
 
 using namespace std;
 
+double eApprox(int n);
+
 double _eApprox(int n)
 {
     return pow((1+1.0/n), n);

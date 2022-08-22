@@ -2,6 +2,8 @@
 
 using namespace std;
 
+void printDivisors (int num);
+
 void printDivisors(int num)
 {
     int div;
@@ -23,16 +25,6 @@ void printDivisors(int num)
         {
             cout << num / div << " ";
         }
-    }
-}
-
-void divisorsTest()
-{
-    for (int i = 1; i <= 50; i++)
-    {
-        printDivisors(i);
-        cout << endl;
-
     }
 }
 
