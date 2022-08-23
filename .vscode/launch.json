@@ -11,6 +11,7 @@
             "program": "${fileDirname}/${fileBasenameNoExtension}",
             "args": [],
             "cwd": "${fileDirname}",
+            "preLaunchTask": "C/C++ Mac Clang build active file"
         },
         {
             "name": "Windows Debug",
