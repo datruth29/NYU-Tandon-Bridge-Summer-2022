@@ -3,7 +3,6 @@ using namespace std;
 
 void analyzeDividors(int num, int& outCountDivs, int& outSumDivs);
 bool isPerfect(int num);
-void test_isPerfect();
 
 void analyzeDividors(int num, int& outCountDivs, int& outSumDivs)
 {
@@ -13,7 +12,6 @@ void analyzeDividors(int num, int& outCountDivs, int& outSumDivs)
     {
         if (num % i == 0)
         {
-//            cout << i << " ";
             outCountDivs++;
             outSumDivs += i;
         }
@@ -28,7 +26,6 @@ void analyzeDividors(int num, int& outCountDivs, int& outSumDivs)
     {
         if (num % i == 0)
         {
-//            cout << num / i << " ";
             outCountDivs++;
             outSumDivs += num / i;
         }
@@ -36,9 +33,6 @@ void analyzeDividors(int num, int& outCountDivs, int& outSumDivs)
 
     outCountDivs--;
     outSumDivs -= num;
-
-    //cout << endl << "Divisors: " << outCountDivs << " Sum: " << outSumDivs << endl;
-
 }
 
 bool isPerfect(int num)
@@ -67,7 +61,6 @@ int main()
         {
             //cout << i << " => " << sum;
             analyzeDividors(sum, pairCount, pairSum);
-            //cout << " => " << pairSum << endl;
             if (i == pairSum )
             {
                 cout << "(" << pairSum << ", " << sum << ")" << endl;
@@ -81,13 +74,4 @@ int main()
     }
 
     return 0;
-}
-
-void test_isPerfect()
-{
-    for (int i = 2; i < 10000000; i++)
-    {
-        if (isPerfect(i))
-            cout << i << " is Perfect!" << endl;
-    }
 }

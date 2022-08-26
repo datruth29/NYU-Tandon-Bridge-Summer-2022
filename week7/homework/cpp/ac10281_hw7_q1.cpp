@@ -26,10 +26,6 @@ void printYearCalender(int year, int startingDay);
 bool isLeapYear(int year);
 int getMonthInfo(int month, int year);
 
-// NOTE: These are tests and should be deleted before hand in
-void _getMonthInfo();
-void _isLeapYear();
-
 int printMonthCalender(int numOfDays, int startingDay)
 {
     cout << "Mon\tTue\tWed\tThu\tFri\tSat\tSun" << endl;
@@ -162,34 +158,6 @@ int getMonthInfo(int month, int year)
 
 int main()
 {
-    //int startDay = printMonthCalender(29, 7);
-    //cout << endl << startDay;
-
-//    cout << isLeapYear(1896) << endl;
-//    cout << isLeapYear(1904) << endl;
-//    cout << isLeapYear(2000) << endl;
-//    cout << isLeapYear(1900) << endl;
-
     printYearCalender(2016, 5);
     return 0;
-}
-
-// NOTE: These are tests and should be deleted before hand in
-void _getMonthInfo()
-{
-    int days;
-    for (int i = 1; i <= 12; i++)
-    {
-        days = getMonthInfo(i, 2000);
-        cout << days << endl;
-    }
-}
-
-void _isLeapYear()
-{
-    for (int i = 1; i <= 3000; i++)
-    {
-        cout << i << " is a leap year: " << isLeapYear(i) << endl;
-    }
-
 }
