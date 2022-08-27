@@ -26,68 +26,6 @@ void printYearCalender(int year, int startingDay);
 bool isLeapYear(int year);
 int getMonthInfo(int month, int year);
 
-int printMonthCalender(int numOfDays, int startingDay)
-{
-    cout << "Mon\tTue\tWed\tThu\tFri\tSat\tSun" << endl;
-
-    if (startingDay > 1)
-    {
-
-        // Tab through missing days
-        for (int i = 1; i < startingDay; i++)
-        {
-            cout << "\t";
-        }
-    }
-
-    int days = 1;
-
-    while (days <= numOfDays)
-    {
-        cout << days << "\t";
-
-        if (startingDay % 7 == 0)
-        {
-            startingDay = 0;
-            cout << endl;
-        }
-
-        days++;
-        startingDay++;
-
-    }
-
-    // This is done because if the month did not end on a Sunday,
-    // it wouldn't create a newline. This would throw off the display
-    // days in a month.
-    if (startingDay > 1)
-    {
-        cout << endl;
-    }
-
-    cout << endl;
-
-
-    return startingDay;
-}
-
-void printYearCalender(int year, int startingDay)
-{
-    int daysInMonth;
-    for (int month = 1; month <= MONTHS_IN_YEAR; month++)
-    {
-        daysInMonth = getMonthInfo(month, year);
-        startingDay = printMonthCalender(daysInMonth, startingDay);
-    }
-}
-
-bool isLeapYear(int year)
-{
-    bool result = ( (year % 4 != 0) ||
-                    ((year % 100 == 0) && (year % 400 != 0)));
-    return !result;
-}
-
 int getMonthInfo(int month, int year)
 {
     int days;
@@ -155,9 +93,78 @@ int getMonthInfo(int month, int year)
     return days;
 }
 
+int printMonthCalender(int numOfDays, int startingDay)
+{
+    cout << "Mon\tTue\tWed\tThu\tFri\tSat\tSun" << endl;
+
+    if (startingDay > 1)
+    {
+        // Tab through missing days
+        for (int i = 1; i < startingDay; i++)
+        {
+            cout << "\t";
+        }
+    }
+
+    int days = 1;
+
+    while (days <= numOfDays)
+    {
+        cout << days << "\t";
+
+        if (startingDay % 7 == 0)
+        {
+            startingDay = 0;
+            cout << endl;
+        }
+
+        days++;
+        startingDay++;
+
+    }
+
+    // This is done because if the month did not end on a Sunday,
+    // it wouldn't create a newline. This would throw off the display
+    // days in a month.
+    if (startingDay > 1)
+    {
+        cout << endl;
+    }
+
+    cout << endl;
+    return startingDay;
+}
+
+void printYearCalender(int year, int startingDay)
+{
+    int daysInMonth;
+    for (int month = 1; month <= MONTHS_IN_YEAR; month++)
+    {
+        daysInMonth = getMonthInfo(month, year);
+        startingDay = printMonthCalender(daysInMonth, startingDay);
+    }
+}
+
+bool isLeapYear(int year)
+{
+    bool result = ( (year % 4 != 0) ||
+                    ((year % 100 == 0) && (year % 400 != 0)));
+    return !result;
+}
 
 int main()
 {
-    printYearCalender(2016, 5);
+    int year = 0;
+    int startingDay = 0;
+
+    cout << "Please enter your calendar year: ";
+    cin >> year;
+
+    cout << "Please enter the start day of the year (Monday = 1, etc): ";
+    cin >> startingDay;
+
+    cout << endl << endl;
+
+    printYearCalender(year, startingDay);
     return 0;
 }
