@@ -46,15 +46,28 @@ bool isPerfect(int num)
 
 int main()
 {
-    int count = 0, sum = 0, pairCount = 0, pairSum = 0;
-    int iterations = 1000000;
+    int iterations;
 
+    cout << "Please enter a positive integer > 2: ";
+    cin >> iterations;
+    cout << endl << endl;
+
+    int count = 0, sum = 0, pairCount = 0, pairSum = 0;
+
+    cout << "Finding all perfect numbers...." << endl << endl;
     for (int i = 2; i <= iterations; i++)
     {
         if (isPerfect(i))
         {
-            cout << i << " is perfect!";
+            cout << i << " is perfect!" << endl;
         }
+    }
+    
+    cout << endl;
+    cout << "Finding all amicable pairs:...." << endl << endl;
+    for (int i = 2; i <= iterations; i++)
+    {
+
         analyzeDividors(i, count, sum);
 
         if (sum > i && sum < iterations)
