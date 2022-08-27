@@ -8,31 +8,17 @@ void analyzeDividors(int num, int& outCountDivs, int& outSumDivs)
 {
     int i;
 
-    for (i = 1; i * i < num; i++)
+    outCountDivs++;
+    outSumDivs += 1;
+
+    for (i = 2; i * i < num; i++)
     {
         if (num % i == 0)
         {
-            outCountDivs++;
-            outSumDivs += i;
+            outCountDivs += 2;
+            outSumDivs += (i + (num / i));
         }
     }
-
-    if ((num / i) + 1 == i)
-    {
-        i--;
-    }
-
-    for (; i >= 1; i--)
-    {
-        if (num % i == 0)
-        {
-            outCountDivs++;
-            outSumDivs += num / i;
-        }
-    }
-
-    outCountDivs--;
-    outSumDivs -= num;
 }
 
 bool isPerfect(int num)
