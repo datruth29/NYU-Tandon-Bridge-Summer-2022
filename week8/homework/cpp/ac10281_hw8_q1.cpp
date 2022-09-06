@@ -18,13 +18,16 @@ int minInArray(int arr[], int arrSize){
     return min;
 }
 
-void printArr(int arr[], int arrSize){
-
-    for (int i = 0; i < arrSize; i++){
-        cout << arr[i] << " ";
+void printLocations(int arr[], int value, int arrSize)
+{
+    for (int i = 0; i < arrSize; i++) {
+        if (arr [i] == value) {
+                cout << i << " ";
+            }
     }
     cout << endl;
 }
+
 int main(){
 
     int arr[ARRAY_SIZE];
@@ -38,7 +41,8 @@ int main(){
     int min = minInArray(arr, ARRAY_SIZE);
 
     cout    << "The minimum value is " << min << ", and is located in the following indices: ";
-    printLocations(arr, ARRAY_SIZE, min);
+
+    printLocations(arr, min, ARRAY_SIZE);
 
     return 0;
 }
