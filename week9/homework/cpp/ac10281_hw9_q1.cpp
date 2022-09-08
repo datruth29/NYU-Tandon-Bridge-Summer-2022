@@ -9,7 +9,7 @@ const int UPPERCASE_UPPER_BOUND = 90;
 const int UPPER_TO_LOWERCASE = 32;
 
 const string ALPHA = "abcdefghijklmnopqrstuvwxyz";
-bool isNotAlpha(char character);
+bool isAlpha(char character);
 void printCounts (int count_arr[], int wordCount);
 void processCharacter(int count_arr[], char character);
 void printArray(int arr[], int size);
@@ -28,7 +28,7 @@ int main() {
     for (int i = 0; i < userInput.length(); i++) {
         currentChar = userInput.at(i);
 
-        if (!isNotAlpha(currentChar)) {
+        if (isAlpha(currentChar)) {
             if (notInWord) {
                 wordCount++;
                 notInWord = false;
@@ -44,10 +44,10 @@ int main() {
     return 0;
 }
 
-bool isNotAlpha(char character) {
-    return (character == ' ' || character == ',' || character == '.');
+bool isAlpha(char character) {
+    return ((character >= 65 && character <= 90) ||
+            (character >= 97 && character <= 122));
 }
-
 
 void processCharacter(int count_arr[], char character) {
     int position = static_cast<int>(character);
