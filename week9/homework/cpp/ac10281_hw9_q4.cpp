@@ -5,7 +5,7 @@ void oddsKeepEvensFlip(int arr[], int arrSize);
 void printArray(int arr[], int arrSize);
 
 int main() {
-    int arr[6] = {5, 2, 11, 7, 6, 4};
+    int arr[6] = {5, -2, 11, -7, 6, 4};
 
     oddsKeepEvensFlip(arr, 6);
     printArray(arr, 6);
@@ -18,12 +18,12 @@ void oddsKeepEvensFlip(int arr[], int arrSize) {
     int index = 0, oddTracker = 0, evenTracker = arrSize-1;
 
     while (index < arrSize) {
-        if (arr[index] % 2 == 1) {
-            holderArr[oddTracker] = arr[index];
-            oddTracker++;
-        } else {
+        if (arr[index] % 2 == 0) {
             holderArr[evenTracker] = arr[index];
             evenTracker--;
+        } else {
+            holderArr[oddTracker] = arr[index];
+            oddTracker++;
         }
         index++;
     }
