@@ -3,8 +3,13 @@
 
 using namespace std;
 const int MAX_ALPHA = 26;
+const int ALIGN_WITH_MOD = 7;
+const int UPPERCASE_LOWER_BOUND = 65;
+const int UPPERCASE_UPPER_BOUND = 90;
+const int UPPER_TO_LOWERCASE = 32;
+
 const string ALPHA = "abcdefghijklmnopqrstuvwxyz";
-bool isAlpha(char character);
+bool isNotAlpha(char character);
 void printCounts (int count_arr[], int wordCount);
 void processCharacter(int count_arr[], char character);
 void printArray(int arr[], int size);
@@ -14,7 +19,7 @@ int main() {
     int wordCount = 0;
     int letterCount[MAX_ALPHA] = { 0 };
 
-    cout << "Please enter a sentence. Don't include letters: " << endl;
+    cout << "Please enter a sentence. Don't include digits: " << endl;
     getline(cin, userInput);
 
     bool notInWord = true;
@@ -23,7 +28,7 @@ int main() {
     for (int i = 0; i < userInput.length(); i++) {
         currentChar = userInput.at(i);
 
-        if (!isAlpha(currentChar)) {
+        if (!isNotAlpha(currentChar)) {
             if (notInWord) {
                 wordCount++;
                 notInWord = false;
@@ -36,13 +41,10 @@ int main() {
 
     printCounts(letterCount, wordCount);
     // printArray(letterCount, MAX_ALPHA);
-
-
-    
     return 0;
 }
 
-bool isAlpha(char character) {
+bool isNotAlpha(char character) {
     return (character == ' ' || character == ',' || character == '.');
 }
 
@@ -50,11 +52,11 @@ bool isAlpha(char character) {
 void processCharacter(int count_arr[], char character) {
     int position = static_cast<int>(character);
 
-    if (position >= 65 && position <= 90) {
-       position = static_cast<int>(character) + 32;
+    if (position >= UPPERCASE_LOWER_BOUND && position <= UPPERCASE_UPPER_BOUND) {
+       position = static_cast<int>(character) + UPPER_TO_LOWERCASE;
     }
-    position += 7 ;
-    //cout << "Character => " << character << ", pos =>" << position << ", after % " << position % MAX_ALPHA << endl;
+    position += ALIGN_WITH_MOD;
+    cout << "Character => " << character << ", pos =>" << position << ", after % " << position % MAX_ALPHA << endl;
     count_arr[position % MAX_ALPHA]++;
 }
 

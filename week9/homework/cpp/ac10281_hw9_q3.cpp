@@ -30,7 +30,7 @@ int main() {
     
     cout << endl << endl;
    // Third Function
-    cout << "getPosNums2 Result:" << endl;
+    cout << "getPosNums3 Result:" << endl;
     cout << "-------------------" << endl;
     int size_three = 0;
     int* arr_three = nullptr;
@@ -63,7 +63,6 @@ int* getPosNums1(int* arr, int arrSize, int& outPosArrSize) {
             outPosArrSize++;
         }
     }
-
     return new_arr;
 }
 
@@ -77,36 +76,31 @@ int* getPosNums2(int* arr, int arrSize, int* outPosArrSizePtr) {
             *outPosArrSizePtr += 1;
         }
     }
-    
     return new_arr;
 }
 
 void getPosNums3(int* arr, int arrSize, int*& outPosArr, int& outPosArrSize) {
     outPosArrSize = 0;
-    int* new_arr = new int[arrSize];
+    outPosArr = new int[arrSize];
 
     for (int i = 0; i < arrSize; i++) {
         if (arr[i] > 0) {
-            new_arr[outPosArrSize] = arr[i];
+            outPosArr[outPosArrSize] = arr[i];
             outPosArrSize++;
         }
     }
-
-    outPosArr = new_arr;
 }
 
 void getPosNums4(int* arr, int arrSize, int** outPosArrPtr, int* outPosArrSizePtr) {
     *outPosArrSizePtr = 0;
-    int* new_arr = new int[arrSize];
+    *outPosArrPtr = new int[arrSize];
 
     for (int i = 0; i < arrSize; i++) {
         if (arr[i] > 0) {
-            new_arr[*outPosArrSizePtr] = arr[i];
+            (*outPosArrPtr)[*outPosArrSizePtr] = arr[i];
             *outPosArrSizePtr += 1;
         }
     }
-    *outPosArrPtr = new_arr;
-    
 }
 
 void printArray(int arr[], int arrSize) {
