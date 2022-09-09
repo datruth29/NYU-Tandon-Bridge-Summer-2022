@@ -7,9 +7,7 @@ const string ALPHA = "abcdefghijklmnopqrstuvwxyz";
 bool isAlpha(char character);
 bool isAnagram(string sentence_a, string sentence_b);
 int* countCharacters(string sentence);
-void printCounts (int count_arr[], int wordCount);
 void processCharacter(int count_arr[], char character);
-void printArray(int arr[], int size);
 
 int main() {
     string first_userInput;
@@ -22,8 +20,6 @@ int main() {
     cout << "Please the first sentence: " << endl;
     getline(cin, second_userInput);
 
-    //printCounts(anagramCheck, wordCount);
-    // printArray(letterCount, MAX_ALPHA);
     if (isAnagram(first_userInput, second_userInput)) {
         cout << "The two sentences are an anagram!" << endl;
     } else {
@@ -72,23 +68,5 @@ void processCharacter(int count_arr[], char character) {
        position = static_cast<int>(character) + 32;
     }
     position += 7 ;
-    //cout << "Character => " << character << ", pos =>" << position << ", after % " << position % MAX_ALPHA << endl;
     count_arr[position % MAX_ALPHA]++;
-}
-
-void printCounts (int count_arr[], int wordCount) {
-    cout << wordCount << '\t' << "words" << endl;
-
-    for (int i = 0; i < MAX_ALPHA; i++) {
-        if (count_arr[i] > 0) {
-            cout << count_arr[i] << '\t' << ALPHA[i] << endl;
-        }
-    }
-}
-
-void printArray(int arr[], int size) {
-    for (int i = 0; i < size; i++) {
-        cout << ALPHA[i] << " => ";
-        cout << arr[i] << endl;
-    }
 }
