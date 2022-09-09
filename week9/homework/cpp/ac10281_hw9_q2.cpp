@@ -4,7 +4,7 @@
 using namespace std;
 const int MAX_ALPHA = 26;
 const string ALPHA = "abcdefghijklmnopqrstuvwxyz";
-bool isNotAlpha(char character);
+bool isAlpha(char character);
 bool isAnagram(string sentence_a, string sentence_b);
 int* countCharacters(string sentence);
 void printCounts (int count_arr[], int wordCount);
@@ -33,7 +33,7 @@ int main() {
     return 0;
 }
 
-bool isNotAlpha(char character) {
+bool isAlpha(char character) {
     return ((character >= 65 && character <= 90) ||
             (character >= 97 && character <= 122));
 }
@@ -57,7 +57,9 @@ bool isAnagram(string sentence_a, string sentence_b) {
 int* countCharacters(string sentence) {
     int* counter = new int[MAX_ALPHA]();
     for(char c : sentence) {
-        processCharacter(counter, c);
+        if (isAlpha(c)) {
+            processCharacter(counter, c);
+        }
     }
 
     return counter;
