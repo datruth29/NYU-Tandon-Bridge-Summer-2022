@@ -2,11 +2,11 @@
 id: t6qo8cy3fboqw50349725kq
 title: Permutations
 desc: ''
-updated: 1662919731064
+updated: 1662919848581
 created: 1662911552780
 ---
 
-__Permutations__ are all possible ways a group of elements can be selected, regardless of the order. This is in contrast with [[discrete-math.combinatorics.combinations]] which cares about the order in which elements are chosen.
+__Permutations__ are all possible ways a group of elements can be selected, while taking into account the order in which they are selected. This is in contrast to [[discrete-math.combinatorics.combinations]], which doesn't care about the order in which the elements are selected.:w
 
 ## Example
 
