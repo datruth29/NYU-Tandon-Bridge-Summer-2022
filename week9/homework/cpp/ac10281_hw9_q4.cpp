@@ -5,10 +5,13 @@ void oddsKeepEvensFlip(int arr[], int arrSize);
 void printArray(int arr[], int arrSize);
 
 int main() {
-    int arr[6] = {5, -2, 11, -7, 6, 4};
+    int arr_a[6] = {5, -2, 11, -7, 6, 4};
+    int arr_b[10] = {2, 4, 6, 8, -2, -1, -9, 5, 3, 11};
 
-    oddsKeepEvensFlip(arr, 6);
-    printArray(arr, 6);
+    oddsKeepEvensFlip(arr_a, 6);
+    printArray(arr_a, 6);
+    oddsKeepEvensFlip(arr_b, 10);
+    printArray(arr_b, 10);
     
     return 0;
 }

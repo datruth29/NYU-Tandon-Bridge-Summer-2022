@@ -6,6 +6,8 @@ const int MAX_ALPHA = 26;
 const int ALIGN_WITH_MOD = 7;
 const int UPPERCASE_LOWER_BOUND = 65;
 const int UPPERCASE_UPPER_BOUND = 90;
+const int LOWERCASE_LOWER_BOUND = 97;
+const int LOWERCASE_UPPER_BOUND = 122;
 const int UPPER_TO_LOWERCASE = 32;
 
 const string ALPHA = "abcdefghijklmnopqrstuvwxyz";
@@ -40,13 +42,12 @@ int main() {
     }
 
     printCounts(letterCount, wordCount);
-    // printArray(letterCount, MAX_ALPHA);
     return 0;
 }
 
 bool isAlpha(char character) {
-    return ((character >= 65 && character <= 90) ||
-            (character >= 97 && character <= 122));
+    return ((character >= UPPERCASE_LOWER_BOUND && character <= UPPERCASE_UPPER_BOUND) ||
+            (character >= LOWERCASE_LOWER_BOUND && character <= LOWERCASE_UPPER_BOUND));
 }
 
 void processCharacter(int count_arr[], char character) {
@@ -67,12 +68,5 @@ void printCounts (int count_arr[], int wordCount) {
         if (count_arr[i] > 0) {
             cout << count_arr[i] << '\t' << ALPHA[i] << endl;
         }
-    }
-}
-
-void printArray(int arr[], int size) {
-    for (int i = 0; i < size; i++) {
-        cout << ALPHA[i] << " => ";
-        cout << arr[i] << endl;
     }
 }
