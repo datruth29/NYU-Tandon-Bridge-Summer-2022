@@ -85,11 +85,10 @@ void main2() {
     cout << "Please enter a number you want to search:" << endl;
     cin >> searchNumber;
 
-    int arrLocationsIndex = 0;
     vector<int> arrLocations;
 
-    for(int i = 0; i < arr.size(); i++) {
-        if (arr[i] == searchNumber) {
+    for(size_t i = 0; i < arr.size(); i++) {
+        if (arr.at(i) == searchNumber) {
             //cout << "I'm here" << endl;
             arrLocations.push_back(i + 1);
         }
@@ -99,7 +98,7 @@ void main2() {
         cout << searchNumber << " is not in any lines.";
     } else {
         cout << searchNumber << " is in lines " << arrLocations[0];
-        for (int i = 1; i < arrLocations.size(); i++) {
+        for (size_t i = 1; i < arrLocations.size(); i++) {
             cout << ", " << arrLocations[i];
         }
         cout << "." << endl;
