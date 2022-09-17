@@ -10,7 +10,13 @@
 				"-g",
 				"${file}",
 				"-o",
-				"${fileDirname}\\${fileBasenameNoExtension}.exe"
+				"${fileDirname}\\${fileBasenameNoExtension}.exe",
+				"-std=c++11",
+				"-Wall",
+				"-Wextra",
+				"-Wuninitialized",
+				"-Wpedantic",
+				"-Werror"
 			],
 			"options": {
 				"cwd": "${fileDirname}"
