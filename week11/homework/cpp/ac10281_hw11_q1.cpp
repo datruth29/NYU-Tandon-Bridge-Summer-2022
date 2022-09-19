@@ -11,9 +11,9 @@ void printRuler(int n);
 
 int main() {
 
-    //printTriangle(4);
-    //printOpositeTriangles(4);
-    printRuler(4);
+    printTriangle(6);
+    printOpositeTriangles(6);
+    printRuler(6);
     return 0;
 }
 
@@ -21,6 +21,12 @@ void printTriangle(int n) {
     if (n <= 0) {
         return;
     }
+
+    if (n == 1) {
+        cout << SYMBOL << endl;
+        return;
+    }
+
     printTriangle(n - 1);
 
     for (int i = 0; i < n; i++) {
@@ -31,6 +37,11 @@ void printTriangle(int n) {
 
 void printOpositeTriangles(int n) {
     if (n <= 0) {
+        return;
+    }
+
+    if (n == 1) {
+        cout << SYMBOL << endl;
         return;
     }
 

@@ -7,7 +7,7 @@ int squared(int num);
 void printArray(int arr[], int arrSize);
 
 int main() {
-    int arr[6] = {0, 2, 3, 4, 5, 16};
+    int arr[6] = {0, 3, 3, 4, 5, 16};
     cout << sumOfSquares(arr, 6) << endl;
     cout << isSorted(arr, 6) << endl;
     return 0;
@@ -22,7 +22,7 @@ int sumOfSquares(int arr[], int arrSize) {
         return squared(arr[0]);
     }
 
-    cout << squared(arr[arrSize-1]) << endl;
+    //cout << squared(arr[arrSize-1]) << endl;
 
     return squared(arr[arrSize-1]) + sumOfSquares(arr, arrSize-1);
 }
@@ -36,13 +36,14 @@ int isSorted(int arr[], int arrSize) {
         return true;
     } 
 
-    if (arrSize == 2) {
-        return (arr[1] > arr[0]);
+    bool result = (arr[arrSize-1] >= arr[arrSize-2]);
+
+    if (result) {
+        return isSorted(arr, arrSize - 1);
     }
 
-    bool result = (arr[arrSize-1] > arr[arrSize-2]);
+    return false;
     
-    return (result && isSorted(arr, arrSize-1));
 }
 
 int squared(int num) {

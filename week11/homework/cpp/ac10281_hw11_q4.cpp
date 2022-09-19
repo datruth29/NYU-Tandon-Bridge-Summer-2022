@@ -4,7 +4,7 @@ using namespace std;
 int jumpIt(int arr[], int arrSize);
 
 int main() {
-    int board[6] = {0, 3, 80, 6, 57, 10};
+    int board[6] = {0, 1, 1, 1, 1, 1};
     cout << jumpIt(board, 6);
     return 0;
 }
