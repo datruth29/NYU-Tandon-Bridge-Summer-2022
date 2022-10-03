@@ -3,7 +3,7 @@
 	"tasks": [
 		{
 			"type": "cppbuild",
-			"label": "C/C++: clang++.exe build active file",
+			"label": "C/C++: Windows clang++.exe build active file",
 			"command": "C:\\mingw64\\bin\\clang++.exe",
 			"args": [
 				"-fdiagnostics-color=always",
@@ -15,8 +15,7 @@
 				"-Wall",
 				"-Wextra",
 				"-Wuninitialized",
-				"-Wpedantic",
-				"-Werror"
+				"-Wpedantic"
 			],
 			"options": {
 				"cwd": "${fileDirname}"

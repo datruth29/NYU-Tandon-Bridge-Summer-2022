@@ -32,7 +32,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "C/C++: clang++.exe build active file"
+            "preLaunchTask": "C/C++: Windows clang++.exe build active file"
         }
     ]
 }

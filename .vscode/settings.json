@@ -13,6 +13,7 @@
     "files.associations": {
         "iostream": "cpp",
         "initializer_list": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "vector": "cpp"
     }
 }
