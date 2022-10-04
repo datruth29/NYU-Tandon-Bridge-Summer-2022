@@ -6,9 +6,6 @@
 
 using namespace std;
 
-
-int create_id();
-
 // Classes
 class Money
 {
@@ -141,35 +138,33 @@ private:
     }
 };
 
-
 class Check
 {
 public:
     Check()
-        :check_id(create_id()), amount(0)
+        :check_id(0), amount(0), is_cashed(false)
     {
-        this->is_cashed = false;
     }
     Check(Money new_amount)
-        :check_id(create_id()), amount(new_amount)
+        :check_id(0), amount(new_amount), is_cashed(false)
     {
-        this->is_cashed = false;
     }
-    
     Check(Money new_amount, bool cashed)
-        :check_id(create_id()), amount(new_amount), is_cashed(cashed)
+        :check_id(0), amount(new_amount), is_cashed(cashed)
     {
 
     }
-    Check(const Check &rhs_check)
-        :check_id(rhs_check.check_id), amount(rhs_check.amount), is_cashed(rhs_check.is_cashed)
+    Check(int id, Money new_amount, bool cashed)
+        :check_id(id), amount(new_amount), is_cashed(cashed)
     {
+
     }
+
     friend ostream &operator<<(ostream &outs, const Check &check)
     {
-        outs << "Check ID: " << check.get_id();
-        outs << " || Amount: " << check.get_amount();
-        outs << " || Has Been Cashed?:  ";
+        outs << "Check ID:" << check.get_id() << "\t";
+        outs << "|| Amount: " << check.get_amount() << "\t";
+        outs << "|| Has Been Cashed?: ";
 
         if (check.has_been_cashed())
             outs << "Yes";
@@ -178,7 +173,9 @@ public:
         outs << "\n";
         return outs;
     }
+
     int get_id() const { return check_id;}
+    void set_id(int id) { check_id = id;}
     Money get_amount() const { return amount; }
     bool has_been_cashed() const { return is_cashed;}
 private:
@@ -191,7 +188,6 @@ private:
 Money get_money_total(vector<Money> &deposits);
 Money get_checkbook_total(vector<Check> &checkbook);
 Money get_checkbook_total(vector<Check> &checkbook, bool cashed);
-vector<Check> get_checks_by_cashed_status(vector<Check> &checkbook, bool cashed);
 void insert_check(vector<Check> &checkbook, Check check);
 void print_checkbook(vector<Check> &checkbook);
 void print_checkbook(vector<Check> &checkbook, bool cashed);
@@ -200,10 +196,12 @@ int main()
 {
     vector<Check> checkbook;
     vector<Money> deposits;
+
     cout << "CheckBalance v1.0\n";
     cout << "Create By: Adam Collado\n\n";
     cout << "This program will help balance your checks and deposits.\n";
     cout << "Before we continue, we must go through a quick setup process.\n\n\n";
+
     cout << "Step 1: Initial Balance\n";
     cout << "-------------------------\n";
     cout << "Please enter your initial bank balance. Use the format ($##.##): ";
@@ -224,23 +222,27 @@ int main()
         deposits.emplace_back(deposit);
     }
 
-    cout << "\n\nStep 3: Checks\n";
-    cout << "-------------------\n";
-    cout << "Please enter the amount for the check in a ($##.##) format, \nfollowed by a 1 is cashed, and a 0 if not cashed.\n";
+    cout << "\n\nStep 3: Enter Checks\n";
+    cout << "------------------------\n";
+    cout << "In this section you will be placing in each of your checks.\n";
+    cout << "For this section you will need to enter your check number, the amount, and whether it was cashed (represented by a 1 for yes, and a 0 for no), in that order.\n";
+    cout << "You will want to separate each by a space on the same line. For example:\n";
+    cout << "123 $25.00 1\n";
+    cout << "Now enter your checks below:\n";
+    int check_id;
     Money check;
     bool cashed;
 
     while(true)
     {
-        cin >> check;
-        if(check.get_value() == 0)
+        cin >> check_id;
+        if(check_id == 0)
         {
             break;
         }
-        cin >> cashed;
+        cin >> check >> cashed;
 
-        //checkbook.emplace_back(Check{check, cashed});
-        insert_check(checkbook, Check{check, cashed});
+        insert_check(checkbook, Check{check_id, check, cashed});
     }
 
     Money cashed_total = get_checkbook_total(checkbook, true);
@@ -267,12 +269,6 @@ int main()
     cout << "========================================\n";
     print_checkbook(checkbook, false);
     return 0;
-}
-
-int create_id()
-{
-    static int id = 0;
-    return ++id;
 }
 
 Money get_money_total(vector<Money> &deposits)
@@ -309,20 +305,6 @@ Money get_checkbook_total(vector<Check> &checkbook, bool cashed)
 
     return temp;
 
-}
-
-vector<Check> get_checks_by_cashed_status(vector<Check> &checkbook, bool cashed)
-{
-    vector<Check> checks;
-    for (Check check: checkbook)
-    {
-        if (cashed == check.has_been_cashed())
-        {
-            checks.emplace_back(check);
-        }
-    }
-
-    return checks;
 }
 
 void insert_check(vector<Check> &checkbook, Check check) 
