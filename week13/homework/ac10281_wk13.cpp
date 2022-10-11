@@ -54,7 +54,6 @@ public:
 public:
 	Organism();
 	Organism(int x, int y);
-    virtual ~Organism() = default;
 
 	virtual void move(WorldState& world);
 	virtual char symbol() const = 0;
@@ -291,6 +290,8 @@ void WorldState::take_next_step()
 
 void WorldState::update_position(Organism* org, int prev_x, int prev_y)
 {
+	int x = org->x_pos;
+	int y = org->y_pos;
 	assert(board[prev_x][prev_y] != nullptr);
 	board[org->x_pos][org->y_pos] = org;
 	board[prev_x][prev_y] = nullptr;
