@@ -122,8 +122,8 @@ public:
 private:
 	static const unsigned int LENGTH = 20;
 	static const unsigned int WIDTH = 20;
-	static const int INITIAL_ANTS = 100;
-	static const int INITIAL_DOODLEBUGS = 5;
+	const int INITIAL_ANTS = 100;
+	const int INITIAL_DOODLEBUGS = 5;
 
 	Organism* board[LENGTH][WIDTH];
 	vector<Organism*> ants;
@@ -144,7 +144,6 @@ int main()
 Moves get_random_move()
 {
 	int selection = rand() % movements.size();
-	//cout << "Movement selection: " << selection << '\n';
 	return movements[selection];
 }
 
@@ -417,7 +416,8 @@ void Organism::move(WorldState& world)
 		break;
 
 	}
-	if (world.is_empty_space(x_pos + x, y_pos + y) && !world.is_beyond_edge(x_pos + x, y_pos + y))
+
+	if (world.is_space_available(x_pos + x, y_pos + y))
 	{
 		x_pos += x;
 		y_pos += y;
