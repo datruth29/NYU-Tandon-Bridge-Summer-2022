@@ -173,6 +173,29 @@ public:
         outs << "\n";
         return outs;
     }
+    friend istream &operator>>(istream &ins, Check &check)
+    {
+        int u_check_id;
+        Money u_amount;
+        bool u_is_cashed;
+        ins >> u_check_id;
+
+        if (u_check_id == 0)
+        {
+            check.check_id = 0;
+            check.amount = Money();
+            check.is_cashed = 0;
+            return ins;
+        }
+
+        ins >> u_amount >> u_is_cashed;
+
+        check.check_id = u_check_id;
+        check.amount = u_amount;
+        check.is_cashed = u_is_cashed;
+
+        return ins;
+    }
 
     int get_id() const { return check_id;}
     void set_id(int id) { check_id = id;}
@@ -229,27 +252,24 @@ int main()
     cout << "You will want to separate each by a space on the same line. For example:\n";
     cout << "123 $25.00 1\n";
     cout << "Now enter your checks below:\n";
-    int check_id;
-    Money check;
-    bool cashed;
+    Check check;
 
     while(true)
     {
-        cin >> check_id;
-        if(check_id == 0)
+        cin >> check;
+        if(check.get_id() == 0)
         {
             break;
         }
-        cin >> check >> cashed;
 
-        insert_check(checkbook, Check{check_id, check, cashed});
+        insert_check(checkbook, check);
     }
 
     Money cashed_total = get_checkbook_total(checkbook, true);
     Money not_cashed_total = get_checkbook_total(checkbook, false);
     Money deposits_total = get_money_total(deposits);
-    Money current_balance = initial_balance + deposits_total + cashed_total;
-    Money new_balance = current_balance + not_cashed_total;
+    Money current_balance = initial_balance + deposits_total - cashed_total;
+    Money new_balance = current_balance - not_cashed_total;
 
     cout << "\n\n";
     cout << "Below are your account details:\n";
