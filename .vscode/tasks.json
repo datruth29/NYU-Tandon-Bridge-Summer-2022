@@ -4,7 +4,7 @@
 		{
 			"type": "cppbuild",
 			"label": "C/C++: Windows clang++.exe build active file",
-			"command": "C:\\mingw64\\bin\\clang++.exe",
+			"command": "clang++.exe",
 			"args": [
 				"-fdiagnostics-color=always",
 				"-g",
