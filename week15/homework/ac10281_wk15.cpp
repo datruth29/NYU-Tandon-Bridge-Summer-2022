@@ -159,7 +159,7 @@ class LinkedList {
             size = 0;
         }
 
-        int size() const
+        int get_size() const
         {
             return size;
         }
