@@ -1,5 +1,7 @@
 // C++ program for the above approach
 #include <iostream>
+#include <ostream>
+
 using namespace std;
   
 // Node class to represent
@@ -58,7 +60,7 @@ class LinkedList {
             if (isEmpty())
             {
                 head = new_node;
-                size++;
+                ++size;
                 return;
             }
 
@@ -70,7 +72,7 @@ class LinkedList {
             }
 
             temp->set_next(new_node);
-            size++;
+            ++size;
         }
         void push_front(T new_data)
         {
@@ -79,10 +81,12 @@ class LinkedList {
             if (isEmpty())
             {
                 head = new_node;
+                ++size;
                 return;
             }
             new_node->set_next(head);
             head = new_node;
+            ++size;
 
         }
         T pop_back()
@@ -99,6 +103,7 @@ class LinkedList {
             {
                 _data = head->get_data();
                 head = nullptr;
+                --size;
                 return _data;
             }           
 
@@ -138,7 +143,31 @@ class LinkedList {
             return 0;
 
         }
+        void insert_after(int loc, T new_data)
+        {
+            if (loc < 0)
+                cout << "ERROR: Location must be greater than 0;";
+            if (loc >= size)
+                cout << "ERROR: Location must be less than size. If placing in last location, index is size - 1";
+            if (loc == 0)
+                push_front(new_data);
+            if (loc == size - 1)
+                push_back(new_data);
+            
+            Node<T>* new_node = new Node<T>(new_data);
+            Node<T>* temp_curr = head;
+            for (int i = 0; i < loc; ++i)
+            {
+                temp_curr = temp_curr->get_next();
+            }
+
+            Node<T>* temp_next = temp_curr->get_next();
+            temp_curr->set_next(new_node);
+            new_node->set_next(temp_next);
+            ++size;
+        }
         bool isEmpty() const { return head == nullptr;}
+
         void clear()
         {
             if (isEmpty())
@@ -156,12 +185,34 @@ class LinkedList {
                 delete temp;
             }
 
+            head = nullptr;
+
             size = 0;
         }
 
-        int size() const
+        int get_size() const
         {
             return size;
+        }
+
+        void print_list() const
+        {
+            if (isEmpty())
+                return;
+
+            Node<T>* temp = head;
+            for (int i = 0; i < size; ++i)
+            {
+                cout << "@: " << i << '\n';
+                cout << "Data: " << temp->get_data() << '\n';
+                temp = temp->get_next();
+            }
+
+            if (temp->get_next() != nullptr)
+            {
+                cout << "ERROR: This should be end of list. Check the print_list() member function";
+                exit(1);
+            }
         }
 
 private:
@@ -180,6 +231,17 @@ int main()
     linky.push_front(5);
     cout << linky.pop_back() << '\n';
     cout << linky.pop_front() << '\n';
+    linky.clear();
+    cout << linky.get_size() << '\n';
+    linky.print_list();
+    linky.push_back(50);
+    linky.push_back(8);
+    linky.push_back(0);
+    linky.print_list();
+    linky.insert_after(1, 15);
+    linky.print_list();
+
+
     cin.get();
 
 }
