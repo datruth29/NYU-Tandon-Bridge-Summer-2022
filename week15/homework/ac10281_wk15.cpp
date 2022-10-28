@@ -86,10 +86,10 @@ template <class T>
 class LinkedList {
     public:
         LinkedList()
-            :head(nullptr), size(0)
+            :head(nullptr), tail(nullptr), size(0)
         { }
         LinkedList(const LinkedList& rhs)
-            :head(nullptr), size(0)
+            :head(nullptr), tail(nullptr), size(0)
         {
             *this = rhs;
         }
@@ -104,18 +104,13 @@ class LinkedList {
             if (isEmpty())
             {
                 head = new_node;
+                tail = new_node;
                 ++size;
                 return;
             }
 
-            Node<T>* temp = head;
-
-            while (temp->get_next() != nullptr)
-            {
-                temp = temp->get_next();
-            }
-
-            temp->set_next(new_node);
+            tail->set_next(new_node);
+            tail = tail->get_next();
             ++size;
         }
         void push_front(T new_data)
@@ -125,6 +120,7 @@ class LinkedList {
             if (isEmpty())
             {
                 head = new_node;
+                tail = new_node;
                 ++size;
                 return;
             }
@@ -147,6 +143,7 @@ class LinkedList {
             {
                 _data = head->get_data();
                 head = nullptr;
+                tail = nullptr;
                 --size;
                 return _data;
             }           
@@ -161,6 +158,7 @@ class LinkedList {
 
             _data = temp_curr->get_data();
             temp_prev->set_next(nullptr);
+            tail = temp_prev;
             delete temp_curr;
 
             --size;
@@ -175,17 +173,20 @@ class LinkedList {
             }
 
             int _data = head->get_data();
-            Node<T>* temp = head;
-            head = temp->get_next();
-            temp->set_next(nullptr);
-            delete temp;
+            if (head == tail)
+            {
+                head = nullptr;
+                tail = nullptr;
+            }
+            else
+            {
+                Node<T>* temp = head;
+                head = temp->get_next();
+                temp->set_next(nullptr);
+                delete temp;
+            }
             --size;
             return _data;
-        }
-        T removeFromHead()
-        {
-            return 0;
-
         }
         void insert_after(unsigned int loc, T new_data)
         {
@@ -210,25 +211,6 @@ class LinkedList {
             new_node->set_next(temp_next);
             ++size;
         }
-        void insert_before(unsigned int loc, T new_data)
-        {
-            if (loc < 0)
-                cout << "ERROR: Location must be greater than 0;";
-            if (loc >= size)
-                cout << "ERROR: Location must be less than size. If placing in last location, index is size - 1";
-            if (loc == 0)
-                push_front(new_data);
-            if (loc == size - 1)
-                push_back(new_data);
-            Node<T>* new_node = new Node<T>(new_data);
-            Node<T>* temp_curr = head;
-            for (size_t i = 0; i < loc; ++i)
-            {
-                temp_curr = temp_curr->get_next();
-            }
-
-
-        }
         bool isEmpty() const { return head == nullptr;}
 
         void clear()
@@ -249,23 +231,24 @@ class LinkedList {
             }
 
             head = nullptr;
+            tail = nullptr;
 
             size = 0;
         }
 
-        void push_in_asc_order(Node<T>* node)
-        {
-            if (isEmpty())
-                push_front(node);
-            
-            Node<T>* temp = head;
+       // void push_in_asc_order(Node<T>* node)
+       // {
+       //     if (isEmpty())
+       //         push_front(node);
+       //     
+       //     Node<T>* temp = head;
 
-            for (size_t i = 0; i < size; i++)
-            {
-                if (node.get_data() <= 
-            }
+       //     for (size_t i = 0; i < size; i++)
+       //     {
+       //         if (node.get_data() <= 
+       //     }
 
-        }
+       // }
 
         int get_size() const
         {
@@ -292,13 +275,50 @@ class LinkedList {
             }
         }
 
+        void insert_asc_order(T data)
+        {
+            if (isEmpty())
+            {
+                push_back(data);
+                return;
+            }
+
+            if (data <= head->get_data())
+            {
+                push_front(data);
+                return;
+            }
+
+            if (data >= tail->get_data())
+            {
+                push_back(data);
+                return;
+            }
+
+
+            Node<T>* temp_curr = head->get_next();
+            Node<T>* temp_prev = head;
+            while (data > temp_curr->get_data())
+            {
+                temp_prev = temp_curr;
+                temp_curr = temp_curr->get_next();
+            }
+
+            Node<T>* node = new Node<T>(data);
+            temp_prev->set_next(node);
+            node->set_next(temp_curr);
+            ++size;
+        }
+
 private:
     Node<T>* head;
+    Node<T>* tail;
     unsigned int size;
 
 };
   
 LinkedList<Customer> process_data_file(ifstream& data_file);
+void test_linked_list();
 void remove_white_space(string& line);
 // Function to delete the
 // node at given position
@@ -318,7 +338,8 @@ int main()
     LinkedList<Customer> customer_data = process_data_file(data_file);
     cout << customer_data.get_size();
     customer_data.print_list();
-//    Node<Customer> customer = customer_data.pop_back();
+    Node<Customer> customer = customer_data.pop_back();
+    
 
 
 
@@ -337,7 +358,7 @@ LinkedList<Customer> process_data_file(ifstream& data_file)
         getline(data_file, name);
         new_customer.price = price;
         new_customer.name = name;
-        processed_data.push_front(new_customer);
+        processed_data.insert_asc_order(new_customer);
        // cout << "Price: " << price << '\n';
        // cout << "Name: " << name << '\n';
        // cout << "Space:" << name[name.size()] << "| " << '\n';
@@ -374,6 +395,12 @@ void test_linked_list()
     linky.print_list();
     linky.insert_after(1, 15);
     linky.print_list();
+
+    LinkedList<int> asc_linky;
+    asc_linky.insert_asc_order(10);
+    asc_linky.insert_asc_order(50);
+    asc_linky.insert_asc_order(5);
+    asc_linky.print_list();
 
     cin.get();
 }
