@@ -1,9 +1,53 @@
 // C++ program for the above approach
 #include <iostream>
-#include <ostream>
+#include <string>
+#include <fstream>
 
 using namespace std;
   
+class Customer
+{
+public:
+    Customer()
+        :price(0), name("")
+    {}
+    Customer(double new_price, string new_name)
+        :price(new_price), name(new_name)
+    {}
+    bool operator==(const Customer& rhs)
+    {
+        return (price == rhs.price && name == rhs.name);
+    }
+    bool operator<(const Customer& rhs)
+    {
+        return (price < rhs.price);
+    }
+    bool operator>(const Customer& rhs)
+    {
+        return (price > rhs.price);
+    }
+    bool operator<=(const Customer& rhs)
+    {
+        return (price <= rhs.price);
+    }
+    bool operator>=(const Customer& rhs)
+    {
+        return (price >= rhs.price);
+    }
+    friend ostream& operator<<(ostream& outs, const Customer& customer)
+    {
+        outs << "Name: " << customer.name << '\n';
+        outs << "Price: " << customer.price << "\n\n";
+        return outs;
+    }
+
+public:
+    double price;
+    string name;
+
+
+};
+
 // Node class to represent
 // a node of the linked list.
 template <class T>
@@ -97,7 +141,7 @@ class LinkedList {
                 exit(1);
             }
 
-            int _data;
+            T _data;
 
             if (head->get_next() == nullptr) 
             {
@@ -143,7 +187,7 @@ class LinkedList {
             return 0;
 
         }
-        void insert_after(int loc, T new_data)
+        void insert_after(unsigned int loc, T new_data)
         {
             if (loc < 0)
                 cout << "ERROR: Location must be greater than 0;";
@@ -156,7 +200,7 @@ class LinkedList {
             
             Node<T>* new_node = new Node<T>(new_data);
             Node<T>* temp_curr = head;
-            for (int i = 0; i < loc; ++i)
+            for (size_t i = 0; i < loc; ++i)
             {
                 temp_curr = temp_curr->get_next();
             }
@@ -201,7 +245,7 @@ class LinkedList {
                 return;
 
             Node<T>* temp = head;
-            for (int i = 0; i < size; ++i)
+            for (size_t i = 0; i < size; ++i)
             {
                 cout << "@: " << i << '\n';
                 cout << "Data: " << temp->get_data() << '\n';
@@ -221,9 +265,66 @@ private:
 
 };
   
+LinkedList<Customer> process_data_file(ifstream& data_file);
+void remove_white_space(string& line);
 // Function to delete the
 // node at given position
 int main()
+{
+
+    ifstream data_file;
+
+    data_file.open("data.txt");
+
+    if (data_file.fail())
+    {
+        cout << "Error opening file. Check file first.";
+        exit(1);
+    }
+
+    LinkedList<Customer> customer_data = process_data_file(data_file);
+    cout << customer_data.get_size();
+    customer_data.print_list();
+//    Node<Customer> customer = customer_data.pop_back();
+
+
+
+}
+
+LinkedList<Customer> process_data_file(ifstream& data_file)
+{
+    LinkedList<Customer> processed_data;
+
+    double price = 0;
+    string name = "";
+    Customer new_customer;
+    while (!data_file.eof())
+    {
+        data_file >> price;
+        getline(data_file, name);
+        new_customer.price = price;
+        new_customer.name = name;
+        processed_data.push_front(new_customer);
+       // cout << "Price: " << price << '\n';
+       // cout << "Name: " << name << '\n';
+       // cout << "Space:" << name[name.size()] << "| " << '\n';
+       // cout << '\n';
+       // int space = name.find_first_not_of('\t');
+       // cout << "Space Location: " << space << "\n\n";
+    }
+
+    return processed_data;
+}
+void remove_white_space(string& line)
+{
+    if (line.empty())
+        return;
+    
+    int begin = 0;
+    int end = line.size();
+}
+
+void test_linked_list()
 {
     LinkedList<int> linky;
     linky.push_back(10);
@@ -241,7 +342,5 @@ int main()
     linky.insert_after(1, 15);
     linky.print_list();
 
-
     cin.get();
-
 }
