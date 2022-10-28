@@ -49,8 +49,6 @@ public:
 
 };
 
-// Node class to represent
-// a node of the linked list.
 template <class T>
 class Node {
 public:
@@ -79,9 +77,6 @@ private:
 	T data;
 	Node<T>* next;
 };
-
-// Linked list class to
-// implement a linked list.
 
 template <class T>
 class LinkedList {
@@ -352,7 +347,7 @@ int main()
         }
         if (temp.price < average)
         {
-            customer_data.push_front(temp);
+            customers.push_back(temp);
             continue;
         }
 
@@ -366,14 +361,14 @@ int main()
 
             double amount_owed = temp.price - average;
 
-            while (amount_owed > 0)
+            while (static_cast<int>(amount_owed) > 0)
             {
                 double amount_payed = 0;
                 double amount_can_be_payed = average - customers.back().price;
                 if (amount_can_be_payed > amount_owed)
                 {
                     amount_payed = amount_owed;
-                    customers.back().price -= amount_payed;
+                    customers.back().price += amount_payed;
                     cout << customers.back().name << ", you gave " << temp.name << " $" << amount_payed << '\n';
                 }
                 else
@@ -382,7 +377,7 @@ int main()
                     cout << customers.back().name << ", you gave " << temp.name << " $" << amount_payed << '\n';
                     customers.pop_back();
                 }
-                amount_owed -= amount_owed;
+                amount_owed -= amount_payed;
             }
         }
 
@@ -402,6 +397,7 @@ LinkedList<Customer> process_data_file(ifstream& data_file, double& average)
         data_file >> price;
         sum += price;
         getline(data_file, name);
+        remove_white_space(name);
         new_customer.price = price;
         new_customer.name = name;
         processed_data.insert_asc_order(new_customer);
@@ -416,8 +412,8 @@ void remove_white_space(string& line)
     if (line.empty())
         return;
     
-    int begin = 0;
-    int end = line.size();
+    while (line.at(0) == ' ' || line.at(0) == '\t')
+        line.erase(line.begin());
 }
 
 void test_linked_list()
