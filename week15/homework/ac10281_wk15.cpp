@@ -210,6 +210,25 @@ class LinkedList {
             new_node->set_next(temp_next);
             ++size;
         }
+        void insert_before(unsigned int loc, T new_data)
+        {
+            if (loc < 0)
+                cout << "ERROR: Location must be greater than 0;";
+            if (loc >= size)
+                cout << "ERROR: Location must be less than size. If placing in last location, index is size - 1";
+            if (loc == 0)
+                push_front(new_data);
+            if (loc == size - 1)
+                push_back(new_data);
+            Node<T>* new_node = new Node<T>(new_data);
+            Node<T>* temp_curr = head;
+            for (size_t i = 0; i < loc; ++i)
+            {
+                temp_curr = temp_curr->get_next();
+            }
+
+
+        }
         bool isEmpty() const { return head == nullptr;}
 
         void clear()
@@ -234,6 +253,20 @@ class LinkedList {
             size = 0;
         }
 
+        void push_in_asc_order(Node<T>* node)
+        {
+            if (isEmpty())
+                push_front(node);
+            
+            Node<T>* temp = head;
+
+            for (size_t i = 0; i < size; i++)
+            {
+                if (node.get_data() <= 
+            }
+
+        }
+
         int get_size() const
         {
             return size;
@@ -252,7 +285,7 @@ class LinkedList {
                 temp = temp->get_next();
             }
 
-            if (temp->get_next() != nullptr)
+            if (temp != nullptr)
             {
                 cout << "ERROR: This should be end of list. Check the print_list() member function";
                 exit(1);
