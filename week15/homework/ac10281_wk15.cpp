@@ -1,5 +1,6 @@
 // C++ program for the above approach
 #include <iostream>
+#include <vector>
 #include <string>
 #include <fstream>
 
@@ -172,7 +173,7 @@ class LinkedList {
                 exit(1);
             }
 
-            int _data = head->get_data();
+            T _data = head->get_data();
             if (head == tail)
             {
                 head = nullptr;
@@ -317,7 +318,7 @@ private:
 
 };
   
-LinkedList<Customer> process_data_file(ifstream& data_file);
+LinkedList<Customer> process_data_file(ifstream& data_file, double& average);
 void test_linked_list();
 void remove_white_space(string& line);
 // Function to delete the
@@ -335,37 +336,78 @@ int main()
         exit(1);
     }
 
-    LinkedList<Customer> customer_data = process_data_file(data_file);
-    cout << customer_data.get_size();
-    customer_data.print_list();
-    Node<Customer> customer = customer_data.pop_back();
-    
+    double average = 0;
+    LinkedList<Customer> customer_data = process_data_file(data_file, average);
+    vector<Customer> customers;
+    customers.reserve(customer_data.get_size());
 
+    while(!customer_data.isEmpty())
+    {
+        Customer temp = customer_data.pop_front();
 
+        if (temp.price == average)
+        {
+            cout << temp.name << ", you don't need to do anything\n";
+            continue;
+        }
+        if (temp.price < average)
+        {
+            customer_data.push_front(temp);
+            continue;
+        }
 
+        if (temp.price > average)
+        {
+            if (customers.empty())
+            {
+                cout << "Something is wrong with inserts in the customer vector.";
+                exit(1);
+            }
+
+            double amount_owed = temp.price - average;
+
+            while (amount_owed > 0)
+            {
+                double amount_payed = 0;
+                double amount_can_be_payed = average - customers.back().price;
+                if (amount_can_be_payed > amount_owed)
+                {
+                    amount_payed = amount_owed;
+                    customers.back().price -= amount_payed;
+                    cout << customers.back().name << ", you gave " << temp.name << " $" << amount_payed << '\n';
+                }
+                else
+                {
+                    amount_payed = amount_can_be_payed;
+                    cout << customers.back().name << ", you gave " << temp.name << " $" << amount_payed << '\n';
+                    customers.pop_back();
+                }
+                amount_owed -= amount_owed;
+            }
+        }
+
+    }
 }
 
-LinkedList<Customer> process_data_file(ifstream& data_file)
+LinkedList<Customer> process_data_file(ifstream& data_file, double& average)
 {
     LinkedList<Customer> processed_data;
 
+    double sum = 0;
     double price = 0;
     string name = "";
     Customer new_customer;
     while (!data_file.eof())
     {
         data_file >> price;
+        sum += price;
         getline(data_file, name);
         new_customer.price = price;
         new_customer.name = name;
         processed_data.insert_asc_order(new_customer);
-       // cout << "Price: " << price << '\n';
-       // cout << "Name: " << name << '\n';
-       // cout << "Space:" << name[name.size()] << "| " << '\n';
-       // cout << '\n';
-       // int space = name.find_first_not_of('\t');
-       // cout << "Space Location: " << space << "\n\n";
     }
+
+    average = sum / processed_data.get_size();
 
     return processed_data;
 }
