@@ -232,20 +232,6 @@ class LinkedList {
             size = 0;
         }
 
-       // void push_in_asc_order(Node<T>* node)
-       // {
-       //     if (isEmpty())
-       //         push_front(node);
-       //     
-       //     Node<T>* temp = head;
-
-       //     for (size_t i = 0; i < size; i++)
-       //     {
-       //         if (node.get_data() <= 
-       //     }
-
-       // }
-
         int get_size() const
         {
             return size;
@@ -314,20 +300,22 @@ private:
 };
   
 LinkedList<Customer> process_data_file(ifstream& data_file, double& average);
-void test_linked_list();
 void remove_white_space(string& line);
-// Function to delete the
-// node at given position
+
 int main()
 {
 
     ifstream data_file;
 
-    data_file.open("data.txt");
+    string data_file_name;
+    cout << "Enter the filename: ";
+    cin >> data_file_name;
+
+    data_file.open(data_file_name);
 
     if (data_file.fail())
     {
-        cout << "Error opening file. Check file first.";
+        cout << "Error opening file. Check file name.";
         exit(1);
     }
 
@@ -380,8 +368,8 @@ int main()
                 amount_owed -= amount_payed;
             }
         }
-
     }
+    cout << "In the end, you should all have spent around $" << average;
 }
 
 LinkedList<Customer> process_data_file(ifstream& data_file, double& average)
@@ -414,31 +402,4 @@ void remove_white_space(string& line)
     
     while (line.at(0) == ' ' || line.at(0) == '\t')
         line.erase(line.begin());
-}
-
-void test_linked_list()
-{
-    LinkedList<int> linky;
-    linky.push_back(10);
-    linky.push_back(50);
-    linky.push_front(5);
-    cout << linky.pop_back() << '\n';
-    cout << linky.pop_front() << '\n';
-    linky.clear();
-    cout << linky.get_size() << '\n';
-    linky.print_list();
-    linky.push_back(50);
-    linky.push_back(8);
-    linky.push_back(0);
-    linky.print_list();
-    linky.insert_after(1, 15);
-    linky.print_list();
-
-    LinkedList<int> asc_linky;
-    asc_linky.insert_asc_order(10);
-    asc_linky.insert_asc_order(50);
-    asc_linky.insert_asc_order(5);
-    asc_linky.print_list();
-
-    cin.get();
 }
