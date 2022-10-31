@@ -1,4 +1,4 @@
-begin
+hello begin
 
 int main()
 {
