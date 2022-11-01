@@ -1,0 +1,9 @@
+0	George Michael Bluth
+75	Gob Bluth
+150	Lindsay Bluth Funke
+87	Lucille Bluth
+50	George Bluth Sr.
+10	Narrator
+25	Tobias Funke
+3	Maeby Funke
+50	Tony Wonder
