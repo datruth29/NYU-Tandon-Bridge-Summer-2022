@@ -26,7 +26,7 @@ int main() {
     cout << "-------------------" << endl;
     int size_two = 0;
     int* arr_two = getPosNums2(arr, ARR_SIZE, &size_two);
-    printArray(arr_two, size_two);
+    printArray(arr_two, *size_two);
     
     cout << endl << endl;
    // Third Function
