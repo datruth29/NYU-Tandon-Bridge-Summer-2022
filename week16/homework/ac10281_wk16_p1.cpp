@@ -19,18 +19,10 @@ const char      SPACE           = ' ';
 const char      TAB             = '\t';
 const char      NEWLINE         = '\n';
 
-enum class Symbols
-{
-    OpenParan,
-    OpenCurly,
-    OpenBracket,
-    OpenProgram,
-};
-
 bool isOpenSymbol(char& symbol);
 bool isClosedSymbol(char& symbol);
 bool isWhiteSpace(char& symbol);
-void process_symbol(char& symbol, vector<char>& stack);
+bool process_character(char& symbol, vector<char>& stack);
 
 int main()
 {
@@ -71,10 +63,11 @@ int main()
 
     while (pas_file.get(current_character))
     {
-        if (isOpenSymbol(current_character))
+        if (!process_character(current_character, stack))
         {
-            stack.push_back(current_character);
-            continue;
+            cout << current_character << '\n';
+            cout << "Error; Something went wrong.";
+            exit(1);
         }
         if (isWhiteSpace(current_character))
         {
@@ -95,9 +88,11 @@ int main()
             current_token = "";
         }
     }
+    cout << "Symbols are balanced!";
+    pas_file.close();
 }
 
-bool process_character(char current_character, vector<char>& stack)
+bool process_character(char& current_character, vector<char>& stack)
 {
     char symbol;
     switch(current_character)
@@ -112,18 +107,21 @@ bool process_character(char current_character, vector<char>& stack)
             stack.pop_back();
             if (symbol == OPEN_BRACKET)
                 return true;
+            cout << "Error: Last item on stack: " << symbol << '\n';
             return false; 
         case CLOSED_PARAN:
             symbol = stack.back();
             stack.pop_back();
-            if (symbol == OPEN_BRACKET)
+            if (symbol == OPEN_PARAN)
                 return true;
+            cout << "Error: Last item on stack: " << symbol << '\n';
             return false; 
         case CLOSED_CURL:
             symbol = stack.back();
             stack.pop_back();
-            if (symbol == OPEN_BRACKET)
+            if (symbol == OPEN_CURL)
                 return true;
+            cout << "Error: Last item on stack: " << symbol << '\n';
             return false; 
         default:
             return true;
