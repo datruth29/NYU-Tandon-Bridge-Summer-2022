@@ -62,7 +62,7 @@ private:
     std::vector<T> _stack;
 
 private:
-    void size_error()
+    void size_error() const
     {
         std::cout << "ERROR: Stack is empty! Can't perform this operation.";
         exit(1);
@@ -72,6 +72,7 @@ private:
 std::string infix_to_postfix(std::string& expression);
 int postfix_evaluation(std::string& expression);
 int ctoi(char& c);
+int precedence(char& symbol);
 
 int main()
 {
@@ -82,6 +83,54 @@ int main()
     int evaluation_result = postfix_evaluation(postfix_eval_test_1);
     std::cout << "Result: " << evaluation_result << '\n';
 
+}
+
+std::string infix_to_postfix(std::string& expression)
+{
+    std::string postfix;
+    VectorStack<char> stack;
+    int precedence_num;
+
+    for(auto& symbol: expression)
+    {
+        precedence_num = precedence(symbol);
+
+        if (precedence_num >= 1)
+        {
+            if (stack.isEmpty())
+            {
+                stack.push(symbol);
+                continue;
+            }
+            char peek_precedence = stack.peek();
+
+            if (precedence(peek_precedence) > precedence_num)
+            {
+
+            }
+
+        }
+
+        if (stack.isEmpty())
+        {
+            if(precedence_num >= 1)
+            {
+                stack.push(symbol);
+                continue;
+            }
+
+            postfix += symbol;
+            continue;
+        }
+
+        char peeked_status = stack.peek();
+        if (precedence(peeked_status) == precedence_num)
+        {
+            return postfix;
+        }
+    }
+
+    return postfix;
 }
 
 int postfix_evaluation(std::string& expression)
@@ -127,6 +176,22 @@ int postfix_evaluation(std::string& expression)
         exit(1);
     }
     return result;
+}
+
+int precedence(char& symbol)
+{
+    switch(symbol)
+    {
+        case '+':
+        case '-':
+            return 1;
+        case '*':
+        case '/':
+            return 2;
+        default:
+            return 0;
+        
+    }
 }
 
 int ctoi(char& c)
