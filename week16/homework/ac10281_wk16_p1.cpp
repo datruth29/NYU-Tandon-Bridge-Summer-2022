@@ -55,12 +55,10 @@ bool balance_checker(ifstream &data_file, vector<char> &stack)
     bool found_begin = false;
     while (data_file.get(current_character))
     {
-        // If begin has already been found, check tokens for end
 		if (isWhiteSpace(current_character) || data_file.eof())
 		{
 			if (found_begin && (token == END_TOKEN))
 			{
-                cout << "Do I get here????????";
 				if ((stack.size() == 1) &&
 					(stack.back() == OPEN_BEGIN))
 				{
