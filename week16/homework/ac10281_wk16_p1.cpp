@@ -20,7 +20,7 @@ const char      TAB             = '\t';
 const char      NEWLINE         = '\n';
 
 bool isWhiteSpace(char& symbol);
-bool process_character(char& symbol, vector<char>& stack);
+bool process_character(const char& symbol, vector<char>& stack);
 bool balance_checker(ifstream& data_file, vector<char>&stack);
 
 int main()
@@ -57,32 +57,39 @@ bool balance_checker(ifstream &data_file, vector<char> &stack)
     {
 		if (isWhiteSpace(current_character) || data_file.eof())
 		{
-			if (found_begin && (token == END_TOKEN))
-			{
-				if ((stack.size() == 1) &&
-					(stack.back() == OPEN_BEGIN))
-				{
-					return true;
-				}
-				else
-				{
-					return false;
-				}
-			}
-			else if (!found_begin && (token == BEGIN_TOKEN))
-			{
-				stack.push_back(OPEN_BEGIN);
-				found_begin = true;
-			}
-			else
-			{
-				token = "";
-			}
-			continue;
+            if (!found_begin)
+            {
+                if (token == BEGIN_TOKEN)
+                {
+                    found_begin = true;
+                    process_character(OPEN_BEGIN, stack);
+                }
+                token = "";
+                continue;
+            }
+
+            if (found_begin)
+            {
+                if (token == BEGIN_TOKEN)
+                {
+                    process_character(OPEN_BEGIN, stack);
+                }
+
+                if (token == END_TOKEN)
+                {
+                    process_character(CLOSED_END, stack);
+                    if (stack.size() == 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            token = "";
+            continue;
 		}
 
         token += current_character;
-        if (!process_character(current_character, stack))
+        if (found_begin && !process_character(current_character, stack))
         {
             return false;
         }
@@ -117,11 +124,12 @@ bool balance_checker(ifstream &data_file, vector<char> &stack)
     }
 }
 
-bool process_character(char& current_character, vector<char>& stack)
+bool process_character(const char& current_character, vector<char>& stack)
 {
     char symbol;
     switch(current_character)
     {
+		case OPEN_BEGIN:
         case OPEN_BRACKET:
         case OPEN_PARAN:
         case OPEN_CURL:
@@ -148,6 +156,13 @@ bool process_character(char& current_character, vector<char>& stack)
                 return true;
             cout << "Error: Last item on stack: " << symbol << '\n';
             return false; 
+        case CLOSED_END:
+            symbol = stack.back();
+            stack.pop_back();
+            if (symbol == OPEN_BEGIN)
+                return true;
+            cout << "Error: Last item on stack: " << symbol << '\n';
+            return false;
         default:
             return true;
     }
