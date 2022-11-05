@@ -55,8 +55,8 @@ bool balance_checker(ifstream &data_file, vector<char> &stack)
     bool found_begin = false;
     while (data_file.get(current_character))
     {
-		if (isWhiteSpace(current_character) || data_file.eof())
-		{
+        if (isWhiteSpace(current_character) || data_file.eof())
+        {
             if (!found_begin)
             {
                 if (token == BEGIN_TOKEN)
@@ -86,7 +86,7 @@ bool balance_checker(ifstream &data_file, vector<char> &stack)
             }
             token = "";
             continue;
-		}
+        }
 
         token += current_character;
         if (found_begin && !process_character(current_character, stack))
@@ -100,21 +100,21 @@ bool balance_checker(ifstream &data_file, vector<char> &stack)
     {
         if (token == END_TOKEN)
         {
-			if ((stack.size() == 1) &&
-				(stack.back() == OPEN_BEGIN))
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+            if ((stack.size() == 1) &&
+                (stack.back() == OPEN_BEGIN))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-		else
-		{
-			cout << "Error: No End Token found.\n";
-			return false;
-		}
+        else
+        {
+            cout << "Error: No End Token found.\n";
+            return false;
+        }
     }
     else
     {
@@ -140,28 +140,28 @@ bool process_character(const char& current_character, vector<char>& stack)
             stack.pop_back();
             if (symbol == OPEN_BRACKET)
                 return true;
-            cout << "Error: Last item on stack: " << symbol << '\n';
+            // cout << "Error: Last item on stack: " << symbol << '\n';
             return false; 
         case CLOSED_PARAN:
             symbol = stack.back();
             stack.pop_back();
             if (symbol == OPEN_PARAN)
                 return true;
-            cout << "Error: Last item on stack: " << symbol << '\n';
+            // cout << "Error: Last item on stack: " << symbol << '\n';
             return false; 
         case CLOSED_CURL:
             symbol = stack.back();
             stack.pop_back();
             if (symbol == OPEN_CURL)
                 return true;
-            cout << "Error: Last item on stack: " << symbol << '\n';
+            // cout << "Error: Last item on stack: " << symbol << '\n';
             return false; 
         case CLOSED_END:
             symbol = stack.back();
             stack.pop_back();
             if (symbol == OPEN_BEGIN)
                 return true;
-            cout << "Error: Last item on stack: " << symbol << '\n';
+            // cout << "Error: Last item on stack: " << symbol << '\n';
             return false;
         default:
             return true;
