@@ -103,6 +103,7 @@ class RBT {
     void doubleCR(RBTNode<T> *&point);
     void singleCR(RBTNode<T> *&point);
     void doubleCCR(RBTNode<T> *&point);
+    void balanceTree(RBTNode<T> *&point);
 
 public:
     RBT() : root(nullptr) {}
@@ -116,43 +117,173 @@ public:
 
 template <class T>
 void RBT<T>::doubleCCR(RBTNode<T> *&point) {
+    // Right then Left
     singleCR(point->right);
     singleCCR(point);
 }
 
 template <class T>
 void RBT<T>::doubleCR(RBTNode<T> *&point) {
+    // Left then Right
     singleCCR(point->left);
     singleCR(point);
 }
 
 template <class T>
 void RBT<T>::singleCR(RBTNode<T> *&point) {
+    // Right Rotation
     RBTNode<T> *grandparent = point;
     RBTNode<T> *parent = point->left;
     RBTNode<T> *child = parent->right;
+
+    // 1) Change grandparents right to childs parent
     grandparent->left = child;
-    parent->right = grandparent;
-    parent->parent = grandparent->parent;
-    grandparent->parent = parent;
     if (child)
+    {
         child->parent = grandparent;
+    }
+
+    // 2) Change parents parent to grandparents parent
+    parent->parent = grandparent->parent;
+    if (grandparent->parent == nullptr)
+    {
+        root = parent;
+    } else if (grandparent == grandparent->parent->left)
+    {
+        grandparent->parent->left = parent->parent;
+    } else if (grandparent == grandparent->parent->right)
+    {
+        grandparent->parent->right = parent->parent;
+    }
+
+    // 3) Change parents right child to grandparent
+    parent->right = grandparent;
+    grandparent->parent = parent;
     // TODO: ADD ROTATION CODE HERE
 }
 
 template <class T>
 void RBT<T>::singleCCR(RBTNode<T> *&point) {
+    // Left Rotation
     RBTNode<T> *grandparent = point;
     RBTNode<T> *parent = point->right;
     RBTNode<T> *child = parent->left;
+
+    // 1) Change grandparents left to childs parent
     grandparent->right = child;
-    parent->left = grandparent;
-    parent->parent = grandparent->parent;
-    grandparent->parent = parent;
     if (child)
+    {
         child->parent = grandparent;
+    }
+
+    // 2) Change parent of grandparent to the parent of parent
+    parent->parent = grandparent->parent;
+    if (grandparent->parent == nullptr)
+    {
+        root = parent;
+    } else if (grandparent == grandparent->parent->left)
+    {
+        grandparent->parent->left = parent;
+    } else if (grandparent == grandparent->parent->right)
+    {
+        grandparent->parent->right = parent;
+    }
+
+    // 3) Change parents left child to grandparent
+    parent->left = grandparent;
+    grandparent->parent = parent;
 
     // TODO: ADD ROTATION CODE HERE
+}
+
+template<class T>
+void RBT<T>::balanceTree(RBTNode<T> *&point)
+{
+    /*
+    Rules:
+    1) point == root, change to black
+    2) point.uncle == red, parent + uncle change to black, gp change to red
+    3) point.uncle == black (triangle), rotate parent right
+    4) point.uncle == black (line), rotate grandparent left
+    */
+
+    // 1) point == root, change to black
+    if (point->parent == nullptr)
+    {
+        root = point;
+        if (getColor(point) == RED)
+            swapColor(point);
+        return;
+    }
+
+    if (root == point->parent)
+    {
+        return;
+    }
+
+    RBTNode<T>* parent = point->parent;
+    RBTNode<T>* grandparent = parent->parent;
+    RBTNode<T>* uncle;
+
+    if (grandparent->left == parent)
+    {
+        uncle = grandparent->right;
+    } else if (grandparent->right == parent) {
+        uncle = grandparent->left;
+    } else {
+        uncle = nullptr;
+    }
+
+    if(grandparent && getColor(parent) == RED)
+    {
+        if (uncle && getColor(uncle) == RED)
+        {
+            swapColor(uncle);
+            swapColor(parent);
+            swapColor(grandparent);
+            balanceTree(grandparent);
+            return;
+        }
+
+        if (uncle == nullptr || getColor(uncle) == BLACK)
+        {
+            if (parent == grandparent->right && point == parent->right)
+            {
+                singleCCR(grandparent);
+                swapColor(grandparent);
+                swapColor(parent);
+                balanceTree(parent);
+                return;
+            }
+
+            if (parent == grandparent->left && point == parent->left)
+            {
+                singleCR(grandparent);
+                swapColor(grandparent);
+                swapColor(parent);
+                balanceTree(parent);
+                return;
+            }
+
+            if (parent == grandparent->right && point == parent->left)
+            {
+                doubleCCR(grandparent);
+                swapColor(grandparent);
+                swapColor(parent);
+                balanceTree(parent);
+                return;
+            }
+
+            if (parent == grandparent->left && point == parent->right)
+            {
+                doubleCR(grandparent);
+                swapColor(grandparent);
+                swapColor(parent);
+                balanceTree(parent);
+                return;
+            }
+        }
+    }
 }
 
 template <class T>
@@ -164,10 +295,7 @@ void RBT<T>::insert(const T &toInsert, RBTNode<T> *&point, RBTNode<T> *parent) {
 
         RBTNode<T> *curr_node = point; // curr_node will be set appropriately when walking up the tree
 
-        if (point->parent == nullptr) 
-        {
-            swapColor(point);
-        }
+        balanceTree(curr_node);
         // TODO: ADD RBT RULES HERE
     } else if (toInsert < point->data) { // recurse down the tree to left to find correct leaf location
         insert(toInsert, point->left, point);
